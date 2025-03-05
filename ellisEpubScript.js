@@ -1,23 +1,23 @@
-// Create lightbox elements
+// CREATE LIGHTBOX ELEMENTS
 const lightboxOverlay = document.createElement('div');
 lightboxOverlay.classList.add('lightbox-overlay');
 document.body.appendChild(lightboxOverlay);
-// Add an image element to the lightbox overlay
+// ADD AN IMAGE ELEMENT TO THE LIGHTBOX OVERLAY
 const lightboxImage = document.createElement('img');
 lightboxOverlay.appendChild(lightboxImage);
-// Function to show lightbox with clicked image
+// FUNCTION TO SHOW LIGHTBOX WITH CLICKED IMAGE
 document.addEventListener('click', (event) => {
 	if (event.target.tagName === 'IMG') {
 		lightboxImage.src = event.target.src;
 		lightboxOverlay.style.display = 'flex'; // Show lightbox
 	}
 });
-// Function to hide lightbox when clicked
+// FUNCTION TO HIDE LIGHTBOX WHEN CLICKED
 lightboxOverlay.addEventListener('click', () => {
 	lightboxOverlay.style.display = 'none';
 });
 
-// Function to resize image to match the combined height of all elements within the text column
+// FUNCTION TO RESIZE IMAGE TO MATCH THE COMBINED HEIGHT OF ALL ELEMENTS WITHIN THE TEXT COLUMN
 function matchImageHeight() {
 	const textColumn = document.querySelector('.text-guided-row .column-text');
 	const imageElement = document.querySelector('.text-guided-row .column-image img');
@@ -42,10 +42,10 @@ function matchImageHeight() {
 	}
 }
 
-// Run matchImageHeight once the window and image have fully loaded
+// RUN MATCHIMAGEHEIGHT ONCE THE WINDOW AND IMAGE HAVE FULLY LOADED
 window.addEventListener('load', matchImageHeight);
 
-// Ensure matchImageHeight runs each time the window is resized
+// ENSURE MATCHIMAGEHEIGHT RUNS EACH TIME THE WINDOW IS RESIZED
 window.addEventListener('resize', matchImageHeight);
 
 // Ensure matchImageHeight runs when the image itself has loaded
@@ -82,3 +82,75 @@ window.addEventListener('DOMContentLoaded', () => {
 function scrollToNext() {
 	document.getElementById("next-section").scrollIntoView({ behavior: "smooth" });
 }
+
+// FUNCTION TO READ THE SCREEN WHEN BUTTON IS CLICKED
+document.addEventListener("DOMContentLoaded", function () {
+	let speech = new SpeechSynthesisUtterance();
+	let isPaused = false;
+	function getReadableText() {
+		let elements = document.body.querySelectorAll("*:not(.skipTTS):not(.skipTTS *)");
+		let textContent = "";
+		elements.forEach(el => {
+			if (!el.closest(".skipTTS")) textContent += el.innerText.trim() + " ";
+		});
+		return textContent.trim();
+	}
+	document.getElementById("readButton").addEventListener("click", function () {
+		if (speechSynthesis.speaking && !speechSynthesis.paused) return;
+		speech.text = getReadableText();
+		speech.lang = "en-US";
+		speech.rate = 1.0;
+		speech.onend = () => (isPaused = false);
+		speechSynthesis.speak(speech);
+	});
+	document.getElementById("pauseButton").addEventListener("click", function () {
+		if (speechSynthesis.speaking && !speechSynthesis.paused) {
+			speechSynthesis.pause();
+			isPaused = true;
+		}
+	});
+	document.getElementById("resumeButton").addEventListener("click", function () {
+		if (isPaused) {
+			speechSynthesis.resume();
+			isPaused = false;
+		}
+	});
+	document.getElementById("stopButton").addEventListener("click", function () {
+		if (speechSynthesis.speaking) {
+			speechSynthesis.cancel();
+			isPaused = false;
+		}
+	});
+});
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js') // Uses relative path
+    .then(reg => console.log('Service Worker registered with scope:', reg.scope))
+    .catch(err => console.error('Service Worker registration failed:', err));
+}
+
+window.addEventListener('load', () => {
+    navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data === 'updateAvailable') {
+            if (confirm("A new version is available. Reload?")) {
+                window.location.reload();
+            }
+        }
+    });
+});
+
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        fetch(event.request)
+        .then(response => {
+            return caches.open(CACHE_NAME).then(cache => {
+                cache.put(event.request, response.clone());
+                self.clients.matchAll().then(clients => {
+                    clients.forEach(client => client.postMessage('updateAvailable'));
+                });
+                return response;
+            });
+        })
+        .catch(() => caches.match(event.request))
+    );
+});
