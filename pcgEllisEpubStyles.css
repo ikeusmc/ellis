@@ -1,0 +1,686 @@
+/* Import Raleway from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap');
+
+/*ENSURES THAT, WHEN A MENU ITEM IS CLICKED, IT SCROLLS TO A POSITION WHERE THE TITLE IS NOT CUT OFF BY THE FLOATING BAR AT THE TOP*/
+html {
+	scroll-padding-top: 70px; /* Adjust the offset */
+	scroll-behavior: smooth; /* Optional for smooth scrolling */
+}
+/* Remove page background color */
+body {
+	background-color: #ffffff; /* Set to white */
+	margin: 0;
+	padding: 0;
+	font-family: Calibri, sans-serif; /* Set global font to Calibri */
+}
+
+/* Floating header style with integrated top border */
+.floating-header {
+	position: fixed; /* Keep the header fixed */
+	top: 0;
+	left: 50%; /* Center relative to the viewport */
+	transform: translateX(-50%); /* Offset to fully center */
+	width: 100%; /* Match the width of the custom container */
+	text-align: left; /* Align text to the left */
+	padding: 10px;
+	padding-left: 100px; /* 200px left buffer */
+	background-color: #ffffff;
+	border-top: 20px solid #0c2a4a; /* Integrated 20px top border */
+	border-radius: 0 0 8px 8px;
+	z-index: 1000;
+	box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Style for h5 inside header */
+.floating-header h5 {
+	margin: 0;
+	color: #0D2A4A; /* Set h5 color */
+	font-size: 1em; /* Match size of a normal paragraph */
+}
+.floating-header .right-container {
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	transform: translateY(-50%);
+}
+
+/* Define normal paragraph text */
+p {
+	font-family: Calibri, sans-serif; /* Apply Calibri font */
+	font-size: 1em; /* Set to standard size */
+	color: #231F20; /* Set color to #231F20 */
+}
+
+/* Responsive H1 */
+h1 {
+	font-size: clamp(2rem, 5vw + 1rem, 4em); /* Responsive font size */
+	color: #0D2A4A;
+	font-family: 'Raleway', Calibri, sans-serif; /* Use Raleway with Calibri as fallback */
+	text-transform: uppercase; /* Make all caps */
+	margin: 0; /* Remove default margin */
+}
+
+/* Responsive H2 */
+h2 {
+	font-size: clamp(1.5rem, 4vw + 0.5rem, 3em); /* Responsive font size */
+	color: #0D2A4A;
+	font-family: 'Raleway', Calibri, sans-serif; /* Use Raleway with Calibri as fallback */
+	margin-top: 20px; /* Keep extra space before */
+	margin-bottom: 20px; /* Keep extra space after */
+	white-space: normal; /* Allow text to wrap on overflow */
+}
+
+/* Define H3 styling with additional space after */
+h3 {
+	margin-bottom: 15px; /* Add space after all H3 elements */
+}
+
+/* Define H4 styling */
+h4 {
+	font-size: 3em; /* 3 times larger than normal paragraph text */
+	color: #6693B9;
+	font-family: 'Raleway', sans-serif; /* Apply Raleway Black font */
+}
+
+h5 {
+	font-size: clamp(1.25rem, 3vw + 0.5rem, 2.5em); /* Slightly smaller than h2 */
+	color: #0D2A4A; /* Same color as h2 */
+	font-family: Calibri, sans-serif; /* Use Calibri font */
+	font-weight: bold; /* Set text to bold */
+	margin-top: 20px; /* Keep extra space before */
+	margin-bottom: 20px; /* Keep extra space after */
+	white-space: normal; /* Allow text to wrap on overflow */
+}
+
+h6 {
+	font-size: 1.2em; /* Slightly larger than a normal paragraph */
+	color: #f47920; /* Same color as h3 */
+	font-family: Calibri, sans-serif; /* Use Calibri font */
+	font-weight: bold; /* Set text to bold */
+	text-align: center; /* Center the text */
+	margin-top: 10px; /* Optional: add space above */
+	margin-bottom: 10px; /* Optional: add space below */
+}
+
+/* 50% width div aligned to the left within custom container */
+.half-width {
+	width: 50%;
+	float: left; /* Align to the left side of the custom container */
+	padding: 10px; /* Optional: add padding for inner spacing */
+	box-sizing: border-box; /* Ensures padding is included within the 50% width */
+}
+
+/* Grid container for one-third and two-thirds layout */
+.grid-container {
+	display: grid;
+	grid-template-columns: 1fr 2fr; /* One-third and two-thirds */
+	gap: 10px; /* Optional spacing between columns */
+	width: 100%; /* Full width of container */
+}
+
+/* One-third width column */
+.one-third {
+	background-color: #ffffff; /* White background */
+	padding: 10px; /* Optional: padding within column */
+	box-sizing: border-box;
+}
+
+/* Two-thirds width column */
+.two-thirds {
+	background-color: #ffffff; /* White background */
+	padding: 10px; /* Optional: padding within column */
+	box-sizing: border-box;
+}
+
+/* Divider line that clears previous content, 100% width, filled with #6693B9 */
+.divider-line {
+	clear: both; /* Clears all previous floating elements */
+	width: 100%;
+	height: 5px; /* Set height to 5px */
+	background-color: #6693B9; /* Fill with #6693B9 color */
+	margin: 20px 0; /* Add vertical spacing */
+}
+
+/* Custom callout box styling */
+.calloutbox {
+	background-color: #0c2a4a; /* Background color */
+	border: 2px solid #f47920; /* Border color and width */
+	padding: 20px; /* Padding within the div */
+	box-sizing: border-box;
+}
+
+/* Centered H3 inside calloutbox with correct color and 2em size */
+.calloutbox > h3 {
+	font-size: 2em; /* Set font size to 2em */
+	color: #f47920 !important; /* Text color with !important to override */
+	font-family: Calibri, sans-serif; /* Use Calibri font */
+	margin: 0 0 15px 0; /* Add margin-bottom for space after h3 */
+	text-align: center; /* Center the h3 text */
+}
+
+/* Paragraph and list text inside calloutbox */
+.calloutbox p,
+.calloutbox ul,
+.calloutbox ul li {
+	color: #ffffff; /* Set text color to white */
+	font-family: Calibri, sans-serif;
+}
+.calloutbox ul {
+	/*list-style: none;  Remove default bullet styling */
+	padding: 0; /* Remove default padding */
+	margin: 0 auto; /* Center the UL horizontally */
+	text-align: center; /* Center-align the UL container */
+	width: fit-content; /* Shrink-wrap to content width */
+}
+
+/* Left-align each LI */
+.calloutbox ul li {
+	text-align: left; /* Left-align the text in each LI */
+}
+.calloutbox p {
+	/*list-style: none;  Remove default bullet styling */
+	padding: 0; /* Remove default padding */
+	margin: 0 auto; /* Center the UL horizontally */
+	text-align: center; /* Center-align the UL container */
+	width: fit-content; /* Shrink-wrap to content width */
+}
+
+
+/* Custom list style with Unicode right-facing arrow */
+.arrowlist {
+	list-style: none; /* Remove default bullets */
+	padding: 0; /* Remove default padding */
+}
+
+.arrowlist li::before {
+	content: "\2192 "; /* Unicode right-facing arrow */
+	color: #231F20; /* Set arrow color, matching paragraph text */
+	font-weight: bold; /* Optional: make arrow bold */
+	margin-right: 5px; /* Space between arrow and list text */
+}
+
+/* Center everything within a column */
+.colcenter {
+	display: flex;
+	flex-direction: column;
+	align-items: center; /* Center horizontally */
+	justify-content: center; /* Center vertically */
+	text-align: center; /* Center text within the column */
+	height: 100%; /* Takes full height of the container if set */
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+	display: none; /* Hidden by default */
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+/* Full-size image in lightbox */
+.lightbox-overlay img {
+	max-width: 90%;
+	max-height: 90%;
+	border: 5px solid #ffffff;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	object-fit: contain;
+	cursor: pointer; /* Cursor to indicate click to close */
+}
+
+/* Custom row where the right column (text) defines the height */
+.text-guided-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+	gap: 10px;
+	align-items: start; /* Align items based on the height of the tallest content */
+}
+
+/* Text column (determines the height of the row) */
+.column-text {
+	padding: 10px;
+	align-self: start; /* Ensures the row height is defined by the text content */
+}
+
+/* Image column with scaling */
+.column-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+/* Image scaling to fit text-defined row height */
+.column-image img {
+	height: 100%; /* Make the image fill the column's height */
+	width: auto; /* Maintain the image's aspect ratio */
+	max-height: 100%; /* Prevent image from exceeding the column height */
+	object-fit: cover; /* Ensures the image scales properly within the container */
+}
+
+/* Base table styling */
+.table1 {
+	width: 100%; /* Full width */
+	border-collapse: collapse; /* Remove default spacing between table cells */
+	font-family: Calibri, sans-serif; /* Set font to Calibri */
+}
+
+/* Alternating column colors */
+.table1 td:nth-child(odd) {
+	background-color: #EEF4FB; /* First color for odd columns */
+}
+
+.table1 td:nth-child(even) {
+	background-color: #D4EFFD; /* Second color for even columns */
+}
+/* Alternating column colors */
+.table1 th:nth-child(odd) {
+	background-color: #EEF4FB; /* First color for odd columns */
+}
+
+.table1 th:nth-child(even) {
+	background-color: #D4EFFD; /* Second color for even columns */
+}
+
+/* Header row styling */
+.table1 th {
+	font-weight: bold; /* Make header text bold */
+	font-size: 1.2em; /* 1.2 times the size of normal paragraph text */
+	padding: 10px; /* Padding inside header cells for readability */
+	text-align: center; /* Center-align text in header cells */
+}
+
+/* Padding, borders, and text alignment for table cells */
+.table1 td {
+	padding: 8px; /* Padding inside cells */
+	border: 1px solid #CCCCCC; /* Light gray border for all cells */
+	text-align: center; /* Center-align text in all cells */
+}
+
+/* Tiny text style */
+.tinytext p,
+.tinytext ul,
+.tinytext ol {
+	color: #0B4673; /* Text color */
+	font-size: 0.75em; /* 75% of normal paragraph size */
+	line-height: 1; /* Remove space between lines */
+	margin: 0; /* Remove default margins */
+	padding: 0; /* Remove default padding */
+}
+
+.tinytext ul,
+.tinytext ol {
+	list-style-type: disc; /* Standard bullet points for ul, numbers for ol */
+	padding-left: 20px; /* Indent bullets or numbers for readability */
+}
+
+.tinytext ul li,
+.tinytext ol li {
+	margin-bottom: 0; /* Ensure no additional space between list items */
+}
+
+
+.flex-container {
+	display: flex;
+	align-items: stretch; /* Ensures both columns stretch to the same height */
+}
+
+.text-column {
+	/*flex: 1;  Allows the text column to grow and take available space */
+	padding: 10px; /* Add padding to control spacing around the text */
+}
+
+.image-column {
+	display: flex; /* Enables alignment of the image within the flex column */
+	align-items: center; /* Centers the image vertically */
+	justify-content: center; /* Centers the image horizontally */
+}
+
+.responsive-image {
+	max-height: 100%; /* Constrains the image height to the height of the text column */
+	width: auto; /* Maintains the image’s aspect ratio */
+}
+img {
+	max-height: 300px;
+	width: auto; /* Maintain aspect ratio */
+}
+
+.checkmarklist {
+	list-style-type: none; /* Remove default bullet points */
+	padding-left: 0; /* Remove default padding */
+}
+.checkmarklist li::before {
+	content: "\2714"; /* Unicode character for checkmark */
+	font-weight: bold; /* Optional: make checkmark bold */
+	margin-right: 8px; /* Space between checkmark and text */
+}
+
+.xmarklist {
+	list-style-type: none; /* Remove default bullet points */
+	padding-left: 0; /* Remove default padding */
+}
+.xmarklist li::before {
+	content: "\2716"; /* Unicode character for X mark */
+	font-weight: bold; /* Optional: make X mark bold */
+	margin-right: 8px; /* Space between X mark and text */
+}
+
+/* Sidebar general styles */
+.sidebar {
+	position: fixed;
+	top: 0;
+	left: -33.33%; /* Hidden by default */
+	width: 33.33%; /* One-third of the screen width */
+	height: 100%;
+	background-color: rgba(12, 42, 74, 0.85); /* 85% transparency */
+	color: #ffffff;
+	padding: 20px;
+	box-sizing: border-box;
+	overflow-y: auto; /* Scrollable content */
+	transition: left 0.3s ease-in-out; /* Smooth slide effect */
+	z-index: 1000;
+}
+/* Language dropdown container */
+.language-dropdown {
+	width: 50%; /* Half the width of the sidebar */
+	float: left; /* Align dropdown to the left */
+	margin-bottom: 20px; /* Space below the dropdown */
+	box-sizing: border-box;
+}
+.language-dropdown select {
+	width: 100%; /* Fill the dropdown container */
+	padding: 8px;
+	font-size: 1em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background-color: #ffffff;
+	color: #0c2a4a;
+}
+/* Clear floated elements to ensure titles start below the dropdown */
+.sidebar .clearfix {
+	clear: both;
+	height: 0; /* No visual impact */
+}
+/* Sidebar links */
+.sidebar a {
+	display: block; /* Each link occupies its own line */
+	word-wrap: break-word; /* Break long words */
+	overflow-wrap: break-word; /* Ensure compatibility across browsers */
+	white-space: normal; /* Allow text to wrap */
+	margin-bottom: 10px; /* Spacing between links */
+	font-size: 1em;
+	color: #ffffff;
+	text-decoration: none;
+}
+.sidebar a:hover {
+	text-decoration: underline; /* Optional: Underline on hover */
+}
+/* Sidebar part headers (h4) */
+.sidebar h4 {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	word-wrap: break-word; /* Ensure long words break */
+	overflow-wrap: break-word;
+	white-space: normal; /* Allow wrapping */
+	font-size: 1.2em;
+	color: #ffffff; /* Same color as links */
+	line-height: 1.3; /* Adjust line height for readability */
+	clear: both; /* Ensure it starts on a new line */
+}
+/* Sidebar chapter headers (h3) */
+.sidebar h3 {
+	margin-top: 15px;
+	margin-bottom: 10px;
+	word-wrap: break-word; /* Break long words */
+	overflow-wrap: break-word;
+	white-space: normal; /* Allow wrapping */
+	font-size: 1.1em;
+	color: #ffffff; /* Same color as links */
+	line-height: 1.3;
+	clear: both; /* Ensure it starts on a new line */
+	font-weight: bold;
+}
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 768px) {
+	.sidebar {
+		padding: 10px; /* Reduce padding for smaller screens */
+	}
+
+	.language-dropdown {
+		width: 100%; /* Full width on mobile */
+	}
+
+	.sidebar a {
+		font-size: 0.9em; /* Slightly smaller font size */
+	}
+
+	.sidebar h4, .sidebar h3 {
+		font-size: 1em; /* Reduce header font size */
+	}
+}
+/* Sidebar open state */
+.sidebar.open {
+	left: 0; /* Slide in */
+}
+/* Close button styling */
+.close-button {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 24px;
+	color: #ffffff;
+	cursor: pointer;
+}
+/* Hamburger menu icon */
+.hamburger-menu {
+	position: absolute; /* Keep it inside the floating-header */
+	top: 50%;
+	left: 10px; /* Position near the left edge */
+	transform: translateY(-50%); /* Center vertically */
+	font-size: 24px;
+	cursor: pointer;
+	color: #0c2a4a;
+	z-index: 1001; /* Keep above the header */
+}
+
+/* Fullscreen Loading Screen */
+#loading-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.9);
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+/* Wrapper for the Logo and Circle */
+.loading-wrapper {
+	position: relative;
+	width: 150px; /* Set explicit dimensions */
+	height: 150px; /* Match width to make it a perfect circle */
+}
+/* Centered Logo */
+.loading-logo {
+	width: 100px; /* Ensure the logo fits within the wrapper */
+	height: 100px; /* Maintain aspect ratio for circular PNG */
+	position: absolute; /* Center the logo within the wrapper */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* Center via translation */
+	z-index: 2; /* Ensure it's above the circle */
+}
+/* Animated Circle */
+.loading-circle {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border: 5px solid transparent;
+	border-top: 5px solid #0c2a4a; /* The color of the spinning circle */
+	border-radius: 50%; /* Make it circular */
+	animation: spin 1.5s linear infinite; /* Spin animation */
+	z-index: 1; /* Ensure it's below the logo */
+}
+/* Spin Animation */
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.centeredimage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.plaintable {
+	border-collapse: collapse;
+	width: 100%;
+}
+.plaintable td {
+	padding: 5px;
+}
+
+.coverpage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	height: 100vh;
+	background: linear-gradient(45deg, #7CD1F6, #2768A5, #7CD1F6);
+	background-size: 300% 300%;
+	animation: gradientShift 8s infinite alternate;
+	color: white;
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	position: relative;
+}
+@keyframes gradientShift {
+	0% { background-position: left; }
+	100% { background-position: right; }
+}
+.coverpage h1 {
+	font-family: 'Raleway', Calibri, sans-serif;
+	font-size: 4rem;
+	font-weight: bold;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	color: white;
+	text-align: left;
+}
+.coverpage h2 {
+	font-family: 'Raleway', Calibri, sans-serif;
+	font-size: 3rem;
+	font-style: italic;
+	font-weight: bold;
+	margin-bottom: 20px;
+	color: white;
+}
+.coverpage .grid-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(4, 1fr);
+	gap: 20px;
+	width: 80%;
+	max-width: 1000px;
+}
+.coverpage .grid-item {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.2);
+	padding: 20px;
+	border-radius: 10px;
+}
+.coverpage .scroll-button {
+	position: absolute;
+	bottom: 20px;
+	padding: 15px 30px;
+	font-size: 1.2rem;
+	background: white;
+	color: #2768A5;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+.coverpage .scroll-button:hover {
+	background: #7CD1F6;
+	color: white;
+}
+
+.col.oval-right {
+	background: white;
+	padding: 20px;
+	border-radius: 0 50% 50% 0; /* Flat on the left, curved on the right */
+	width: 80%; /* Adjust width as needed */
+	height: 100px; /* Adjust height as needed */
+	max-width: 300px; /* Optional: Prevent excessive stretching */
+}
+.col.oval-left {
+	background: white;
+	padding: 20px;
+	border-radius: 50% 0% 0% 50%; /* Flat on the left, curved on the right */
+	width: 80%; /* Adjust width as needed */
+	height: 100px; /* Adjust height as needed */
+	max-width: 300px; /* Optional: Prevent excessive stretching */
+}
+
+.image-container-logo {
+	display: flex;
+	justify-content: left; /* Centers horizontally */
+	align-items: center; /* Centers vertically */
+	width: 100%;
+	height: 100%;
+	text-align: center; /* Ensures proper alignment */
+	overflow: hidden; /* Prevents potential overflow */
+}
+.image-container-logo-right {
+	display: flex;
+	justify-content: right; /* Centers horizontally */
+	align-items: center; /* Centers vertically */
+	width: 100%;
+	height: 100%;
+	text-align: center; /* Ensures proper alignment */
+	overflow: hidden; /* Prevents potential overflow */
+}
+.image-container-logo-right img {
+	display: block;
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain; /* Ensures the image fits without cropping */
+}
+
+.btn-primary {
+	display: inline-block;
+	padding: 10px 20px;
+	background-color: #0C2A4A;
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 6px;
+	border: none;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+	background-color: #094067;
+}
