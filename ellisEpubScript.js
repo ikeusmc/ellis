@@ -87,6 +87,7 @@ function scrollToNext() {
 document.addEventListener("DOMContentLoaded", function () {
 	let speech = new SpeechSynthesisUtterance();
 	let isPaused = false;
+	
 	function getReadableText() {
 		let elements = document.body.querySelectorAll("*:not(.skipTTS):not(.skipTTS *)");
 		let textContent = "";
@@ -95,7 +96,13 @@ document.addEventListener("DOMContentLoaded", function () {
 		});
 		return textContent.trim();
 	}
-	document.getElementById("readButton").addEventListener("click", function () {
+
+	function addEventIfExists(id, event, handler) {
+		const element = document.getElementById(id);
+		if (element) element.addEventListener(event, handler);
+	}
+
+	addEventIfExists("readButton", "click", function () {
 		if (speechSynthesis.speaking && !speechSynthesis.paused) return;
 		speech.text = getReadableText();
 		speech.lang = "en-US";
@@ -103,19 +110,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		speech.onend = () => (isPaused = false);
 		speechSynthesis.speak(speech);
 	});
-	document.getElementById("pauseButton").addEventListener("click", function () {
+
+	addEventIfExists("pauseButton", "click", function () {
 		if (speechSynthesis.speaking && !speechSynthesis.paused) {
 			speechSynthesis.pause();
 			isPaused = true;
 		}
 	});
-	document.getElementById("resumeButton").addEventListener("click", function () {
+
+	addEventIfExists("resumeButton", "click", function () {
 		if (isPaused) {
 			speechSynthesis.resume();
 			isPaused = false;
 		}
 	});
-	document.getElementById("stopButton").addEventListener("click", function () {
+
+	addEventIfExists("stopButton", "click", function () {
 		if (speechSynthesis.speaking) {
 			speechSynthesis.cancel();
 			isPaused = false;
@@ -123,12 +133,13 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 });
 
+//INITALIZE THE SERVICE WORKER
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js') // Uses relative path
     .then(reg => console.log('Service Worker registered with scope:', reg.scope))
     .catch(err => console.error('Service Worker registration failed:', err));
 }
-
+// NOTIFICATION IF A NEW VERSION IS FOUND WHEN BACK ONLINE
 window.addEventListener('load', () => {
     navigator.serviceWorker.addEventListener('message', event => {
         if (event.data === 'updateAvailable') {
@@ -138,7 +149,7 @@ window.addEventListener('load', () => {
         }
     });
 });
-
+//CHECK FOR NEW VERSION WHEN BACK ON LINE
 self.addEventListener('fetch', event => {
     event.respondWith(
         fetch(event.request)
