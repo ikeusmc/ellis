@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					options.forEach(option => {
 						const langValue = option.getAttribute("lang");
 						if (langValue) {
-							const newLink = `${document.location.origin}${document.location.pathname}?lang=${langValue}${window.location.hash}`;
-							option.setAttribute("data-link", newLink);
+							const localFile = `index_${langValue}.html`; // Adjust the filename pattern as needed
+							option.setAttribute("data-link", localFile);
 						}
 						languageSelect.appendChild(option.cloneNode(true));
 					});
 					languageSelect.value = currentLanguage;
 					languageSelect.addEventListener("change", function () {
 						const selectedOption = languageSelect.options[languageSelect.selectedIndex];
-						const link = selectedOption.getAttribute("data-link");
-						if (link) window.location.href = link;
+						const fileLink = selectedOption.getAttribute("data-link");
+						if (fileLink) window.location.replace(fileLink); // Redirect to local file
 					});
 				}
 			})
