@@ -6,12 +6,11 @@ function toggleSidebar() {
 }
 document.addEventListener("DOMContentLoaded", function () {
 	function getLanguageCode() {
-		const htmlLang = document.documentElement.lang;
-		if (htmlLang) return htmlLang;
-		const titleParts = document.title.split(" - ");
-		if (titleParts.length > 1) return titleParts[titleParts.length - 1];
-		return "en";
+		const fileName = window.location.pathname.split("/").pop().split(".")[0]; // Get the filename without extension
+		const fileParts = fileName.split("_"); // Split by underscore
+		return fileParts.length > 1 ? fileParts[1] : "en"; // Extract language if available, default to "en"
 	}
+
 	function loadSidebar(languageCode) {
 		const sidebarFileName = `sidebar_${languageCode}.html`;
 		fetch(sidebarFileName)
@@ -20,11 +19,15 @@ document.addEventListener("DOMContentLoaded", function () {
 				return response.text();
 			})
 			.then(data => {
-				document.getElementById("sidebar").innerHTML = data;
-				loadLanguageList(languageCode);
+				const sidebar = document.getElementById("sidebar");
+				if (sidebar) {
+					sidebar.innerHTML = data;
+					loadLanguageList(languageCode);
+				}
 			})
 			.catch(error => console.error(error));
 	}
+
 	function loadLanguageList(currentLanguage) {
 		fetch("languageList.html")
 			.then(response => {
@@ -41,7 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					options.forEach(option => {
 						const langValue = option.getAttribute("lang");
 						if (langValue) {
-							const localFile = `index_${langValue}.html`; // Adjust the filename pattern as needed
+							const baseFile = window.location.pathname.split("/").pop().split("_")[0]; // Get base file name
+							const localFile = `${baseFile}_${langValue}.html`; // Construct new filename
 							option.setAttribute("data-link", localFile);
 						}
 						languageSelect.appendChild(option.cloneNode(true));
@@ -56,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			})
 			.catch(error => console.error(error));
 	}
+
 	const languageCode = getLanguageCode();
 	loadSidebar(languageCode);
 });
